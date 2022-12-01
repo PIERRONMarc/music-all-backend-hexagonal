@@ -1,0 +1,8 @@
+grumphp:
+    tasks:
+        phpstan:
+            configuration: '.phpstan.neon'
+            level: 6
+            triggered_by: [ 'php' ]
+            memory_limit: "-1"
+            use_grumphp_paths: true

@@ -11,6 +11,11 @@ WORKDIR /var/www/html
 # php extensions installer: https://github.com/mlocati/docker-php-extension-installer
 COPY --from=mlocati/php-extension-installer --link /usr/bin/install-php-extensions /usr/local/bin/
 
+# persistent / runtime deps
+RUN apk add --no-cache \
+		git \
+	;
+
 RUN set -eux; \
     install-php-extensions \
     	intl \

@@ -7,6 +7,8 @@
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "phpstan/phpstan-phpunit": "^1.2",
+        "phpstan/phpstan-symfony": "^1.2",
         "symfony/console": "6.1.*",
         "symfony/dotenv": "6.1.*",
         "symfony/flex": "^2",
@@ -15,12 +17,14 @@
         "symfony/yaml": "6.1.*"
     },
     "require-dev": {
+        "phpro/grumphp": "^1.14"
     },
     "config": {
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "symfony/flex": true,
-            "symfony/runtime": true
+            "symfony/runtime": true,
+            "phpro/grumphp": true
         },
         "optimize-autoloader": true,
         "preferred-install": {
