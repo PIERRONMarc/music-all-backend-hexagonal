@@ -1,0 +1,4 @@
+localhost {
+    root * /var/www/html/public
+    php_fastcgi php:9000
+}

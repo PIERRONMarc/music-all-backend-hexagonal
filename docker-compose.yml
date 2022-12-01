@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  php:
+    build:
+      context: .
+      target: app_php
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www/html
+    ports:
+      - "9000:9000"
+
+  caddy:
+    image: caddy:2.6
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+      - ./public:/var/www/html/public:ro
+      - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+
