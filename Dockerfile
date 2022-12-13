@@ -4,7 +4,7 @@
 # https://docs.docker.com/develop/develop-images/multistage-build/#stop-at-a-specific-build-stage
 # https://docs.docker.com/compose/compose-file/#target
 
-FROM php:8.1-fpm-alpine AS app_php
+FROM php:8.2-fpm-alpine AS app_php
 
 WORKDIR /var/www/html
 

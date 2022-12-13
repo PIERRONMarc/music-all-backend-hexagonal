@@ -13,3 +13,7 @@
 /phpunit.xml
 .phpunit.result.cache
 ###< phpunit/phpunit ###
+
+###> JWT ###
+/config/jwt/
+###< JWT ###
