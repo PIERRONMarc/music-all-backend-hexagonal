@@ -14,9 +14,15 @@ COPY --from=mlocati/php-extension-installer --link /usr/bin/install-php-extensio
 # persistent / runtime deps
 RUN apk add --no-cache \
 		git \
+        autoconf \
+        gcc \
+        g++ \
+        make \
+        openssl-dev \
 	;
 
 RUN set -eux; \
+    pecl install mongodb; \
     install-php-extensions \
     	intl \
     	zip \
@@ -24,6 +30,8 @@ RUN set -eux; \
 		opcache \
         xdebug \
     ;
+
+COPY docker/php/conf.d/symfony.ini /usr/local/etc/php/conf.d/symfony.ini
 
 # https://getcomposer.org/doc/03-cli.md#composer-allow-superuser
 ENV COMPOSER_ALLOW_SUPERUSER=1

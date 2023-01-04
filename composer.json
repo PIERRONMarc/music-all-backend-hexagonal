@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "lcobucci/jwt": "^4.2",
+        "mongodb/mongodb": "*",
         "phpstan/phpstan-phpunit": "^1.2",
         "phpstan/phpstan-symfony": "^1.2",
         "symfony/console": "6.1.*",
