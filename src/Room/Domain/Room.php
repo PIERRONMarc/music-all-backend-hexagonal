@@ -2,10 +2,11 @@
 
 namespace App\Room\Domain;
 
-class Room
-{
-    private string $id;
+use App\Room\Domain\Event\RoomWasCreated;
+use App\Shared\Domain\Aggregate\AbstractEventSourcedAggregateRoot;
 
+class Room extends AbstractEventSourcedAggregateRoot
+{
     private string $name;
 
     private Guest $host;
@@ -19,17 +20,6 @@ class Room
      * @var Guest[]
      */
     private array $guests = [];
-
-    public function getId(): string
-    {
-        return $this->id;
-    }
-
-    public function setId(string $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
 
     public function getName(): string
     {
@@ -79,5 +69,33 @@ class Room
     {
         $this->guests[] = $guest;
         return $this;
+    }
+
+    public static function create(
+        string $roomId,
+        string $roomName,
+        string $hostName,
+        string $hostToken
+    ): self
+    {
+        $room = new Room();
+        $room->apply(new RoomWasCreated($roomId, $roomName, $hostName, $hostToken));
+
+        return $room;
+    }
+
+    protected function applyRoomWasCreated(RoomWasCreated $event): void
+    {
+        $host = (new Guest())
+            ->setName($event->hostName)
+            ->setRole(Guest::ROLE_ADMIN)
+            ->setToken($event->hostToken)
+        ;
+
+        $this
+            ->setHost($host)
+            ->setName($event->roomName)
+            ->setId($event->roomId)
+        ;
     }
 }

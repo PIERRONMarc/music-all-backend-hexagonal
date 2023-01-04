@@ -2,12 +2,15 @@
 
 namespace App\Tests\Room\Infrastructure\Controller;
 
+use App\Tests\DatabaseTrait;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 class CreateRoomControllerTest extends WebTestCase
 {
+    use DatabaseTrait;
+
     protected ?KernelBrowser $client = null;
 
     protected function setUp(): void
@@ -24,5 +27,11 @@ class CreateRoomControllerTest extends WebTestCase
         $this->assertMatchesRegularExpression($uuidPattern, $data['id'] ?? false, 'Invalid UUID');
 
         $this->assertResponseIsSuccessful();
+    }
+
+    protected function tearDown(): void
+    {
+        parent::tearDown();
+        $this->clearEventStore();
     }
 }

@@ -32,3 +32,20 @@ services:
     App\Shared\Infrastructure\JWTBuilder:
         arguments:
             - '%env(resolve:JWT_SECRET_KEY)%'
+
+    app.event_store.mongodb_client:
+        class: MongoDB\Client
+        arguments: [ '%env(resolve:MONGODB_URL)%' ]
+
+    app.event_store.mongodb_collection:
+        class: MongoDB\Collection
+        factory: [ '@app.event_store.mongodb_client', selectCollection ]
+        arguments: [ '%env(resolve:MONGODB_DB)%', 'events' ]
+
+#    app.event_store.mongodb:
+#        class: App\Shared\Infrastructure\EventSourcing\MongoDBEventStore
+#        arguments: [ '@app.event_store.mongodb_collection']
+
+    App\Shared\Infrastructure\EventSourcing\MongoDBEventStore:
+        arguments:
+            - '@app.event_store.mongodb_collection'

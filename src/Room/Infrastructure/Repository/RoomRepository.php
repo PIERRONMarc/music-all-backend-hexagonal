@@ -4,11 +4,12 @@ namespace App\Room\Infrastructure\Repository;
 
 use App\Room\Domain\Room;
 use App\Room\Domain\RoomRepositoryInterface;
+use App\Shared\Domain\EventSourcing\AbstractEventSourcingRepository;
 
-class RoomRepository implements RoomRepositoryInterface
+class RoomRepository extends AbstractEventSourcingRepository implements RoomRepositoryInterface
 {
-    public function save(Room $room): void
+    public function store(Room $room): void
     {
-        // TODO save into somethings
+        $this->save($room);
     }
 }

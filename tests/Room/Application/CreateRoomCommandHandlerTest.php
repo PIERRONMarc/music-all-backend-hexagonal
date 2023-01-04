@@ -17,14 +17,13 @@ class CreateRoomCommandHandlerTest extends TestCase
     {
         $repository = $this->createMock(RoomRepositoryInterface::class);
         $repository->expects(self::once())
-            ->method('save')
+            ->method('store')
             ->with(self::callback(
                 fn(Room $room): bool => $room->getName() === 'Red Rocks'
                     && $room->getHost()->getName() === 'Angry Duck'
                     && $room->getHost()->getToken() === 'Token'
                     && $room->getHost()->getRole() === 'ADMIN'
                     && $room->getSongs() === []
-                    && $room->getGuests()[0] == $room->getHost()
                     && $room->getId() === 'd8092592-74b4-47e8-863d-df7061a6293d'
             ))
         ;
@@ -50,14 +49,13 @@ class CreateRoomCommandHandlerTest extends TestCase
     {
         $repository = $this->createMock(RoomRepositoryInterface::class);
         $repository->expects(self::once())
-            ->method('save')
+            ->method('store')
             ->with(self::callback(
                 fn(Room $room): bool => $room->getName() === 'O2 Arena'
                     && $room->getHost()->getName() === 'Adorable Duck'
                     && $room->getHost()->getToken() === 'AnotherToken'
                     && $room->getHost()->getRole() === 'ADMIN'
                     && $room->getSongs() === []
-                    && $room->getGuests()[0] == $room->getHost()
                     && $room->getId() === 'd8092592-74b4-47e8-863d-df7061a6293d'
             ))
         ;
