@@ -4,9 +4,9 @@ namespace App\Tests;
 
 trait DatabaseTrait
 {
-    protected function clearEventStore(): void
+    protected function clearMongoDB(): void
     {
-        $client = static::getContainer()->get('app.event_store.mongodb_client');
+        $client = static::getContainer()->get('app.mongodb_client');
         $db = $client->selectDatabase($_ENV['MONGODB_DB']);
 
         foreach ($db->listCollections() as $collection) {

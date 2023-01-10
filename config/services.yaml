@@ -33,13 +33,13 @@ services:
         arguments:
             - '%env(resolve:JWT_SECRET_KEY)%'
 
-    app.event_store.mongodb_client:
+    app.mongodb_client:
         class: MongoDB\Client
         arguments: [ '%env(resolve:MONGODB_URL)%' ]
 
     app.event_store.mongodb_collection:
         class: MongoDB\Collection
-        factory: [ '@app.event_store.mongodb_client', selectCollection ]
+        factory: [ '@app.mongodb_client', selectCollection ]
         arguments: [ '%env(resolve:MONGODB_DB)%', 'events' ]
 
 #    app.event_store.mongodb:
@@ -49,3 +49,7 @@ services:
     App\Shared\Infrastructure\EventSourcing\MongoDBEventStore:
         arguments:
             - '@app.event_store.mongodb_collection'
+
+    App\Room\Infrastructure\ReadModel\MongoDBReadModelRoomRepository:
+        arguments:
+            - '@app.mongodb_client'

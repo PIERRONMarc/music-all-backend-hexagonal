@@ -15,7 +15,7 @@ abstract class AbstractEventSourcingRepository
     {
         $domainEventStream = $aggregateRoot->getUncommittedEvents();
         $this->eventStore->append($aggregateRoot->getId(), $domainEventStream);
-        $this->eventBus->publish($domainEventStream);
+        $this->eventBus->dispatch($domainEventStream);
     }
 
 }

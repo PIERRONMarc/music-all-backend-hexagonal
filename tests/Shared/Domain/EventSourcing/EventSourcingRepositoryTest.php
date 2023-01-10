@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Tests\Shared\Domain\Repository;
+namespace App\Tests\Shared\Domain\EventSourcing;
 
 use App\Room\Domain\Room;
 use App\Shared\Domain\Bus\Event\EventBusInterface;
-use App\Shared\Domain\Bus\Event\EventListenerInterface;
 use App\Shared\Domain\EventSourcing\AbstractEventSourcingRepository;
 use App\Shared\Domain\EventSourcing\EventStoreInterface;
 use PHPUnit\Framework\TestCase;
@@ -21,22 +20,17 @@ class EventSourcingRepositoryTest extends TestCase
         $repository->save($room);
 
         $this->assertTrue($eventStore->hasAppend);
-        $this->assertTrue($eventBus->hasPublished);
+        $this->assertTrue($eventBus->hasDispatched);
     }
 }
 
 class EventBusStub implements EventBusInterface
 {
-    public bool $hasPublished = false;
+    public bool $hasDispatched = false;
 
-    public function subscribe(EventListenerInterface $eventListener): void {}
-
-    /**
-     * @inheritdoc
-     */
-    public function publish(array $domainMessages): void
+    public function dispatch(array $domainMessages): void
     {
-        $this->hasPublished = true;
+        $this->hasDispatched = true;
     }
 }
 

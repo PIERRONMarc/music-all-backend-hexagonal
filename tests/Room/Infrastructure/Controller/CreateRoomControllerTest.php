@@ -32,6 +32,6 @@ class CreateRoomControllerTest extends WebTestCase
     protected function tearDown(): void
     {
         parent::tearDown();
-        $this->clearEventStore();
+        $this->clearMongoDB();
     }
 }
