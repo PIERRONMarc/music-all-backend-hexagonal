@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Shared\Infrastructure\Bus\Command;
+namespace App\Tests\Shared\Infrastructure\Bus\Event;
 
 use App\Shared\Domain\Bus\Event\EventBusInterface;
 use App\Shared\Domain\DomainMessage;

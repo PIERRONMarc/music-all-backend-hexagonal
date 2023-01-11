@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Room\Domain;
+namespace App\Room\Domain\Repository;
+
+use App\Room\Domain\Room;
 
 interface RoomRepositoryInterface
 {

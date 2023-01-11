@@ -69,6 +69,17 @@ class MongoDBReadModelRoomRepositoryTest extends TestCase
         $this->assertEquals($roomListView, $savedRoomListView);
     }
 
+    public function testGetRoomList(): void
+    {
+        $roomListView = new RoomListView('1', 'Red Rocks');
+
+        $this->repository->saveRoomListView($roomListView);
+
+        $savedRoomListViews = $this->repository->getRoomList();
+
+        $this->assertEquals([$roomListView], $savedRoomListViews);
+    }
+
     public function tearDown(): void
     {
         $this->client->selectDatabase($_ENV['MONGODB_DB'])->drop();

@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-class CreateRoomControllerTest extends WebTestCase
+class GetRoomListControllerTest extends WebTestCase
 {
     use DatabaseTrait;
 
@@ -18,21 +18,21 @@ class CreateRoomControllerTest extends WebTestCase
         $this->client = static::createClient();
     }
 
-    public function testRoomCreation(): void
+    public function testGetRoomList(): void
     {
-        $this->client->request(Request::METHOD_POST, '/room');
+        $this->client->jsonRequest(Request::METHOD_POST, '/room');
+        $roomId = json_decode($this->client->getResponse()->getContent(), true)['id'];
+
+        $this->client->jsonRequest(Request::METHOD_GET, '/room');
         $data = json_decode($this->client->getResponse()->getContent(), true);
 
-        $uuidPattern = "/^\{?[0-9a-f]{8}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{4}-?[0-9a-f]{12}}?$/i";
-        $this->assertMatchesRegularExpression($uuidPattern, $data['id'] ?? false, 'Invalid UUID');
-
-        $this->assertResponseIsSuccessful();
+        $this->assertEquals($roomId, $data[0]['id']);
     }
 
     protected function tearDown(): void
     {
-        $this->clearMongoDB();
         $this->client = null;
+        $this->clearMongoDB();
         parent::tearDown();
     }
 }

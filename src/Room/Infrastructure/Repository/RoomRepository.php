@@ -3,7 +3,7 @@
 namespace App\Room\Infrastructure\Repository;
 
 use App\Room\Domain\Room;
-use App\Room\Domain\RoomRepositoryInterface;
+use App\Room\Domain\Repository\RoomRepositoryInterface;
 use App\Shared\Domain\EventSourcing\AbstractEventSourcingRepository;
 
 class RoomRepository extends AbstractEventSourcingRepository implements RoomRepositoryInterface

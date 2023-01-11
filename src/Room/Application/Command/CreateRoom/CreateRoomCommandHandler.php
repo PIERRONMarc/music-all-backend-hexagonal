@@ -3,7 +3,7 @@
 namespace App\Room\Application\Command\CreateRoom;
 
 use App\Room\Domain\Room;
-use App\Room\Domain\RoomRepositoryInterface;
+use App\Room\Domain\Repository\RoomRepositoryInterface;
 use App\Shared\Application\Command\CommandHandlerInterface;
 use App\Shared\Application\TokenBuilderInterface;
 use App\Shared\Domain\RandomGuestNameGeneratorInterface;

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Tests\Room\Application;
+namespace App\Tests\Room\Application\Command\CreateRoom;
 
 use App\Room\Application\Command\CreateRoom\CreateRoomCommand;
 use App\Room\Application\Command\CreateRoom\CreateRoomCommandHandler;
 use App\Room\Domain\Room;
-use App\Room\Domain\RoomRepositoryInterface;
+use App\Room\Domain\Repository\RoomRepositoryInterface;
 use App\Shared\Application\TokenBuilderInterface;
 use App\Shared\Domain\RandomGuestNameGeneratorInterface;
 use App\Shared\Domain\RandomRoomNameGeneratorInterface;
