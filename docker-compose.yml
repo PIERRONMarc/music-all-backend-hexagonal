@@ -24,6 +24,15 @@ services:
       - ./public:/var/www/html/public:ro
       - ./docker/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
 
+  mongo:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER:-root}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD:-root}
+    ports:
+      - "27017:27017"
+
 volumes:
   caddy_data:
   caddy_config:
